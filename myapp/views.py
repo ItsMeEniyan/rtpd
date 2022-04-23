@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render
 
 def home(request):
@@ -15,13 +14,24 @@ def getPredictions(video):
     else:
         return 'error'
         
-def result(request):
+def resultbody(request):
 
     body_unicode = request.body
     f = open("test.mp4", "wb")
     f.write(body_unicode)
     f.close()
     
-    print("hai")
+    print("body")
+
+    return render(request, 'result.html', {'result': 'yes'})
+
+def resulthand(request):
+
+    body_unicode = request.body
+    f = open("test.mp4", "wb")
+    f.write(body_unicode)
+    f.close()
+    
+    print("hands")
 
     return render(request, 'result.html', {'result': 'yes'})

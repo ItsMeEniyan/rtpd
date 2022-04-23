@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path
 
-from .views import home, result
+from .views import home, resulthand, resultbody
 
 urlpatterns = [
     path('', home, name='home'),
-    path('analyse/', result, name='result')
+    path('analysehand/', resulthand, name='result'),
+    path('analysebody/', resultbody, name='result')
 ]
