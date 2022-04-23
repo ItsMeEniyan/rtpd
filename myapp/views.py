@@ -1,3 +1,5 @@
+from modules.hands import *
+
 from django.shortcuts import render
 
 def home(request):
@@ -33,5 +35,11 @@ def resulthand(request):
     f.close()
     
     print("hands")
+    #call the function in hands.py
+    output = mainFunction()
 
-    return render(request, 'result.html', {'result': 'yes'})
+    return render(request, 'result.html', {'result': output})
+
+
+
+
