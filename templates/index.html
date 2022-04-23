@@ -10,10 +10,12 @@
 	<header>
 		<h1>REAL TIME PARKINSONS SYMPTOM DETECTION</h1> </header>
         <p>Please select your Detection settings</p>
-        <input type="radio" id="hand" name="Script_selector" value="hand">
+        <input type="radio" id="hand" name="Script_selector" value="hand" checked="checked">
         <label for="hand">Hands</label><br>
         <input type="radio" id="css" name="Script_selector" value="body">
         <label for="body">Full Body</label><br>
+		<p>Age of the patient</p>
+		<input type="number" id="age" min="0" value="35">
 	<main> {% csrf_token %}
 		<p>
 			<button id="btnStart">START RECORDING</button>
@@ -21,7 +23,7 @@
 			<button id="btnStop">STOP RECORDING</button>
 		</p>
 		<video></video>
-		<video id="vid2" controls></video>
+		<!-- <video id="vid2" controls></video> -->
 		<!-- could save to canvas and do image manipulation and saving too -->
 	</main>
 	<script>
@@ -82,7 +84,7 @@
 		//add listeners for saving video/audio
 		let start = document.getElementById('btnStart');
 		let stop = document.getElementById('btnStop');
-		let vidSave = document.getElementById('vid2');
+		// let vidSave = document.getElementById('vid2');
 		let mediaRecorder = new MediaRecorder(mediaStreamObj);
 		let chunks = [];
 		start.addEventListener('click', (ev) => {
@@ -102,7 +104,7 @@
 			});
 			chunks = [];
 			let videoURL = window.URL.createObjectURL(blob);
-			vidSave.src = videoURL;
+			// vidSave.src = videoURL;
 
 			function getCookie(name) {
 				let cookieValue = null;
@@ -121,6 +123,7 @@
 			const csrftoken = getCookie('csrftoken');
 
             var radioSelected = document.querySelector('input[name="Script_selector"]:checked').value;
+			var age = document.getElementById("age").value;
             console.log(radioSelected);
 			var xhr = new XMLHttpRequest();
             if(radioSelected=="hand"){
@@ -129,10 +132,20 @@
                 xhr.open('POST', '/analysebody/', true);
             }
 			xhr.setRequestHeader('X-CSRFToken', csrftoken);
+			xhr.setRequestHeader('age', age);
 			xhr.onload = function(e) {
 				console.log('Sent');
 			};
 			xhr.send(blob);
+
+			xhr.onload = function() {
+  			if (xhr.status != 200) { // analyze HTTP status of the response
+    			alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+ 			} else { // show the result
+				document.write(xhr.response);
+				console.log(xhr.response);
+			}
+		};
 		}
 	}).catch(function(err) {
 		console.log(err.name, err.message);

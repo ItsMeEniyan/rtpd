@@ -18,17 +18,24 @@ def getPredictions(video):
         
 def resultbody(request):
 
+    age=request.headers['age']
     body_unicode = request.body
     f = open("test.mp4", "wb")
     f.write(body_unicode)
     f.close()
     
     print("body")
+    result = mainFunction(age)
 
-    return render(request, 'result.html', {'result': 'yes'})
+    output= {
+        'result': result,
+        }
+
+    return render(request, 'result.html', output)
 
 def resulthand(request):
 
+    age=request.headers['age']
     body_unicode = request.body
     f = open("test.mp4", "wb")
     f.write(body_unicode)
@@ -36,9 +43,13 @@ def resulthand(request):
     
     print("hands")
     #call the function in hands.py
-    output = mainFunction()
+    result = mainFunction(age)
 
-    return render(request, 'result.html', {'result': output})
+    output= {
+        'result': result,
+        }
+
+    return render(request, 'result.html', output)
 
 
 
