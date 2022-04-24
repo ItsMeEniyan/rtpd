@@ -196,22 +196,23 @@ def doctorValidation(age, normalizedmean, normalizedmean30to50, normalizedmean50
             return "Normal Patient"
     elif age >= 50:
         if normalizedmean >= normalizedmean50above:  # 50
-            return "You migh have PDD"
+            return "You might have PDD"
         elif normalizedmean > normalizedmean30to50 and normalizedmean < normalizedmean50above:  # 35
-            return "You have to visit your nearest Nuerological Surgeon. You show symptoms of starting stage of PDD"
+            return "You have to visit your nearest Neurological Surgeon. You show symptoms of starting stage of PDD"
         else:
             return "Normal Patient"
 
 
-def mainFunction():
+def mainFunction(age):
     myNormalizedMean = mainVideoProcessingFunction()
+    myNormalizedMean = round(myNormalizedMean,2)
     
     stringReturn = "Your Similarity Index value is: "+str(myNormalizedMean)+"%"
 
     print("Your Similarity Index value is: ", myNormalizedMean, "%", sep='')
     
-    stringReturn += str(doctorValidation(64, myNormalizedMean, 35, 50))
+    stringReturn += str(doctorValidation(age, myNormalizedMean, 35, 50))
     
-    print(doctorValidation(64, myNormalizedMean, 35, 50))  # the input should be given by the doctor!
+    print(doctorValidation(age, myNormalizedMean, 35, 50))  # the input should be given by the doctor!
 
     return stringReturn

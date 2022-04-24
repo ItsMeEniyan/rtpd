@@ -1,4 +1,5 @@
-from modules.hands import *
+from modules.hands import mainFunction as mainHands
+from modules.body import mainFunction as mainBody
 
 from django.shortcuts import render
 
@@ -25,7 +26,7 @@ def resultbody(request):
     f.close()
     
     print("body")
-    result = mainFunction(age)
+    result = mainBody(int(age))
 
     output= {
         'result': result,
@@ -43,7 +44,7 @@ def resulthand(request):
     
     print("hands")
     #call the function in hands.py
-    result = mainFunction(age)
+    result = mainHands(int(age))
 
     output= {
         'result': result,
