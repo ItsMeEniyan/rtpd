@@ -4,28 +4,205 @@
 <head>
 	<meta charset="UTF-8">
 	<title>MediaCapture and Streams API</title>
-	<meta name="viewport" content="width=device-width"> </head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width">
+	<style>
+	body {
+		font-family: 'Open Sans', sans-serif;
+		background-color: #BCE08A;
+		margin: 0%;
+	}
+	
+	.Header {
+		margin: 0%;
+  background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
+	}
+	
+	.Header h3 {
+		margin: 0%;
+		color: #ffffff;
+		padding: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 800;
+	}
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	section .right-half{
+		text-align: center;
+	}
+
+	div {
+		height: 100%;
+	}
+	
+	article {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
+		padding: 20px;
+	}
+	
+	.container {
+		display: table;
+		width: 100%;
+		height: 100vh;
+	}
+	
+	.left-half {
+		background-color: #ffffff;
+		position: absolute;
+		left: 0px;
+		width: 30%;
+	}
+	
+	.right-half {
+		background-color: #f0f0f0;
+		position: absolute;
+		right: 0px;
+		width: 80%;
+	}
+	.button {
+		/* background-color: #4CAF50; Green */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 25px;
+  border: 2px solid #000;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+	}
+	.rad-label {
+  display: flex;
+  align-items: center;
+
+  border-radius: 100px;
+  padding: 14px 16px;
+  margin: 10px 0;
+
+  cursor: pointer;
+  transition: .3s;
+}
+
+.rad-label:hover,
+.rad-label:focus-within {
+  background: hsla(0, 0%, 80%, .14);
+}
+
+.rad-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  z-index: -1;
+}
+
+.rad-design {
+  width: 22px;
+  height: 22px;
+  border-radius: 100px;
+
+  background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
+  position: relative;
+}
+
+.rad-design::before {
+  content: '';
+
+  display: inline-block;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+
+  background: hsl(0, 0%, 90%);
+  transform: scale(1.1);
+  transition: .3s;
+}
+
+.rad-input:checked+.rad-design::before {
+  transform: scale(0);
+}
+
+.rad-text {
+  color: hsl(0, 0%, 60%);
+  margin-left: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 900;
+
+  transition: .3s;
+}
+
+.rad-input:checked~.rad-text {
+  color: hsl(0, 0%, 40%);
+}
+/* 1 */
+.btn-1 {
+  transition: all 0.3s ease;
+}
+.btn-1:hover {
+   box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+}
+
+	</style>
+</head>
 
 <body>
-	<header>
-		<h1>REAL TIME PARKINSONS SYMPTOM DETECTION</h1> </header>
-        <p>Please select your Detection settings</p>
-        <input type="radio" id="hand" name="Script_selector" value="hand" checked="checked">
-        <label for="hand">Hands</label><br>
-        <input type="radio" id="css" name="Script_selector" value="body">
-        <label for="body">Full Body</label><br>
-		<p>Age of the patient</p>
-		<input type="number" id="age" min="0" value="35">
-	<main> {% csrf_token %}
-		<p>
-			<button id="btnStart">START RECORDING</button>
-			<br/>
-			<button id="btnStop">STOP RECORDING</button>
-		</p>
-		<video></video>
-		<!-- <video id="vid2" controls></video> -->
-		<!-- could save to canvas and do image manipulation and saving too -->
-	</main>
+	<div class="Header">
+		<h3 class="Text">REAL TIME PARKINSONS SYMPTOM DETECTION</h3> </div>
+	<section class="container">
+		<div class="left-half">
+			<!-- <p>Please select your Detection settings</p>
+			<input type="radio" id="hand" name="Script_selector" value="hand" checked="checked">
+			<label for="hand">Hands</label>
+			<br>
+			<input type="radio" id="css" name="Script_selector" value="body">
+			<label for="body">Full Body</label>
+			<br> -->
+			<label class="rad-label">
+				<input type="radio" id="hand" class="rad-input" value="hand" name="Script_selector" checked="checked">
+				<div class="rad-design"></div>
+				<div class="rad-text">Hands</div>
+			</label>
+			
+			<label class="rad-label">
+				<input type="radio" id="body" class="rad-input" value="body" name="Script_selector">
+				<div class="rad-design"></div>
+				<div class="rad-text">Full Body</div>
+			</label>
+			<p>Age of the patient</p>
+			<input type="number" id="age" min="0" value="35"> </div>
+		<div class="right-half"> {% csrf_token %}
+			<br>
+			<br>
+			<video></video>
+			<p>
+				<button class="button  btn-1" id="btnStart">START RECORDING</button>
+				<button class="button btn-1" id="btnStop" style="background-color: rgb(236, 75, 75);">STOP RECORDING</button>
+			</p>
+			
+		</div>
+	</section>
 	<script>
 	let constraintObj = {
 		audio: false,
@@ -105,7 +282,6 @@
 			chunks = [];
 			let videoURL = window.URL.createObjectURL(blob);
 			// vidSave.src = videoURL;
-
 			function getCookie(name) {
 				let cookieValue = null;
 				if(document.cookie && document.cookie !== '') {
@@ -121,31 +297,29 @@
 				return cookieValue;
 			}
 			const csrftoken = getCookie('csrftoken');
-
-            var radioSelected = document.querySelector('input[name="Script_selector"]:checked').value;
+			var radioSelected = document.querySelector('input[name="Script_selector"]:checked').value;
 			var age = document.getElementById("age").value;
-            console.log(radioSelected);
+			console.log(radioSelected);
 			var xhr = new XMLHttpRequest();
-            if(radioSelected=="hand"){
-                xhr.open('POST', '/analysehand/', true);
-            }else{
-                xhr.open('POST', '/analysebody/', true);
-            }
+			if(radioSelected == "hand") {
+				xhr.open('POST', '/analysehand/', true);
+			} else {
+				xhr.open('POST', '/analysebody/', true);
+			}
 			xhr.setRequestHeader('X-CSRFToken', csrftoken);
 			xhr.setRequestHeader('age', age);
 			xhr.onload = function(e) {
 				console.log('Sent');
 			};
 			xhr.send(blob);
-
 			xhr.onload = function() {
-  			if (xhr.status != 200) { // analyze HTTP status of the response
-    			alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
- 			} else { // show the result
-				document.write(xhr.response);
-				console.log(xhr.response);
-			}
-		};
+				if(xhr.status != 200) { // analyze HTTP status of the response
+					alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+				} else { // show the result
+					document.write(xhr.response);
+					console.log(xhr.response);
+				}
+			};
 		}
 	}).catch(function(err) {
 		console.log(err.name, err.message);
