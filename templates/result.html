@@ -11,6 +11,22 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <style>
+    .button {
+		/* background-color: #4CAF50; Green */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 25px;
+  border: 2px solid #000;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+	}
     .center {
       position: absolute;
       text-align: center;
@@ -20,6 +36,17 @@
       font-family: Arial, Helvetica, sans-serif;
       background-color: rgb(230, 239, 245);
     }
+    /* 1 */
+.btn-1 {
+  transition: all 0.3s ease;
+}
+.btn-1:hover {
+   box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+}
   </style>
 </head>
 
@@ -31,7 +58,7 @@
 {{ result }}
   </h1>
     <form action="">
-  <button type="submit">Analyse again</button>
+  <button type="submit" class="button btn-1">Analyse again</button>
 </form>
 
 </body>
